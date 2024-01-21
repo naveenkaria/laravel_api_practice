@@ -12,4 +12,17 @@ class DeviceController extends Controller
     {
         return $id ? Device::find($id) : Device::all();
     }
+
+    function add(Request $req)
+    {
+        $device = new Device;
+        $device->name = $req->name;
+        $device->member_id = $req->member_id;
+        $result = $device->save();
+        if ($result) {
+            return ["Result" => "Device has been saved"];
+        } else {
+            return ["Result" => "Operation failed"];
+        }
+    }
 }
